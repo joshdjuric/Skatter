@@ -1,0 +1,17 @@
+{
+    "name" : "Skatter",
+    "identifier" : "com.sketchapp.examples.skatter",
+    "version" : "1.0.0",
+    "description" : "Attempting to build a plugin with a set of commands to enable shape scattering. Currently just rootates randomly... shortcut key included :boom:",
+    "authorEmail" : "joshdjuric@gmail.com",
+    "author" : "Josh Djuric",
+    "commands" : [
+    {
+      "script" : "random-rotate.js",
+      "handler" : "onRun",
+      "shortcut" : "alt cmd R",
+      "name" : "Random Rotate",
+      "identifier" : "randomrotate"
+    }
+  ]
+}
