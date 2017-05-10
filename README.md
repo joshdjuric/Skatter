@@ -23,3 +23,6 @@ Todo:
   - add entropy handle
   
 ![PreviewRotation](https://raw.githubusercontent.com/joshdjuric/Skatter/master/docs/preview-rotation.gif "Preview rotation")
+
+## Beware
+This is currently kinda shit and largely un-tested. Seems to work with groups, text layers, shapes. However, many apologies if it crashes Sketch for you.
