@@ -34,11 +34,6 @@ function onRun(context) {
   //   return;
   // }
 
-  // if (layers.length == 0) {
-  //   doc.showMessage('Hey stoops! You need to select some layers to arrange.');
-  //   return;
-  // }
-
   doc.showMessage('maxDimension: ' + maxDimension)
 
   grid()
@@ -47,14 +42,23 @@ function onRun(context) {
 function grid() {
   var cols = Math.floor(_w / maxDimension);
   var rows = Math.floor(_h / maxDimension);
+  var rowCount = 0
+  var colCount = 0
   var units = cols * rows
 
   for (var i = 0; i < units; i++) {
     var item = layers[Math.floor(Math.random() * layers.length)]
     var dupe = item.duplicate();
+    var posX = colCount * maxDimension
+    var poxY = rowCount * maxDimension
 
-    dupe.frame().setX(Math.random() * 1000);
-    dupe.frame().setY(Math.random() * 1000);
-    randomRotate(dupe);
+    if (colCount == cols - 1) {
+      colCount = 0
+      rowCount++;
+    }
+
+    dupe.frame().setX(posX);
+    dupe.frame().setY(poxY);
+    // randomRotate(dupe);
   }
 }
