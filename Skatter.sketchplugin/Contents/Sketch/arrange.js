@@ -30,7 +30,8 @@ function onRun(context) {
   }
 
   selection.iterate(function(layer){
-    if (layer.container.isArtboard) {
+    if (layer.container.isArtboard ||
+        layer.container.isGroup) {
       container = layer.container
     }
   })
@@ -71,9 +72,10 @@ function grid() {
   var item = getRandomLayer();
 
   for (var i = 0; i < units; i++) {
-
-    while(item.name() == prevLayerName) {
-      item = getRandomLayer()
+    if (layers.count() > 1) {
+      while(item.name() == prevLayerName) {
+        item = getRandomLayer()
+      }
     }
 
     prevLayerName = item.name()
@@ -82,8 +84,8 @@ function grid() {
     dupe.name = 'col: ' + colCount + ', row:' + rowCount
     // dupe.moveToBack()
 
-    var posX = colCount * unitX + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
-    var posY = rowCount * unitY + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
+    var posX = applyEntropy(colCount * unitX)
+    var posY = applyEntropy(rowCount * unitY)
 
     if (colCount == cols) {
       colCount = 0
@@ -98,6 +100,10 @@ function grid() {
 
     randomRotate(dupe)
   }
+}
+
+function applyEntropy(value) {
+  return value + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
 }
 
 function getRandomLayer() {
