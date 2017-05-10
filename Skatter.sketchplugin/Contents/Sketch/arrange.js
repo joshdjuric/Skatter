@@ -9,8 +9,8 @@
 var _w = 1600
 var _h = 640
 var maxDimension = 0
-var entropy = 50
-var spaceScale = 1.5
+var entropy = 0
+var spaceScale = 1 // NEVER SET THIS TO ZERO todo: error handling
 var selection = []
 var artboards = []
 var artboard = null
@@ -36,13 +36,11 @@ function onRun(context) {
   })
 
   for (var i = 0; i < layers.count(); i++) {
-    maxDimension = Math.max(maxDimension, Math.max(layers[i].frame().width(), layers[i].frame().height()))
+    maxDimension = Math.ceil(Math.max(maxDimension, Math.max(layers[i].frame().width(), layers[i].frame().height())))
     parent = layers
   }
 
   maxDimension *= spaceScale
-
-  // log('maxDimension: ' + maxDimension)
 
   grid()
 
@@ -59,35 +57,35 @@ function grid() {
     _w = container.sketchObject.frame().width();
     _h = container.sketchObject.frame().height();
 
-    group = container.newGroup();
+    // group = container.newGroup();
   }
 
-  var cols = Math.floor(_w / maxDimension)
-  var rows = Math.floor(_h / maxDimension)
-
-  log('cols: ' + cols + ', rows: ' + rows)
+  var cols = Math.ceil(_w / maxDimension)
+  var rows = Math.ceil(_h / maxDimension)
 
   var rowCount = 0
   var colCount = 0
-  var units = cols * rows
+  var unitX = _w / cols
+  var unitY = _h / rows
+  var units = (cols + 1) * (rows + 1)
   var item = getRandomLayer();
 
   for (var i = 0; i < units; i++) {
 
     while(item.name() == prevLayerName) {
-      item = getRandomLayer();
+      item = getRandomLayer()
     }
 
     prevLayerName = item.name()
 
-    var dupe = item.duplicate();
+    var dupe = item.duplicate()
+    dupe.name = 'col: ' + colCount + ', row:' + rowCount
+    // dupe.moveToBack()
 
-    var posX = colCount * maxDimension + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
-    var posY = rowCount * maxDimension + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
+    var posX = colCount * unitX + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
+    var posY = rowCount * unitY + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
 
-    // log('posX: ' + posX + ', posY: ' + posY)
-
-    if (colCount == cols - 1) {
+    if (colCount == cols) {
       colCount = 0
       rowCount++;
     }
@@ -95,8 +93,8 @@ function grid() {
       colCount++
     }
 
-    dupe.frame().setX(posX + maxDimension / 2)
-    dupe.frame().setY(posY + maxDimension / 2)
+    dupe.frame().setX(posX - dupe.frame().width() / 2)
+    dupe.frame().setY(posY - dupe.frame().height() / 2)
 
     randomRotate(dupe)
   }
