@@ -20,6 +20,10 @@ var container = null
 function onRun(context) {
   var sketch = context.api()
   var doc = context.document
+  spaceScale = [doc askForUserInput:"Extra space scale %" initialValue:"0"]
+  spaceScale = 1 + spaceScale / 100
+
+  entropy = [doc askForUserInput:"Entropy % (the larger the number the more random the Skatter)" initialValue:"0"]
 
   selection = sketch.selectedDocument.selectedLayers
   layers = selection.nativeLayers
