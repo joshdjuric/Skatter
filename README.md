@@ -1,5 +1,8 @@
 # Skatter
-Currently a work in progress. I'd like Skatter to be a plugin with tools to assist with creating randomised patterns out of pre-determined shapes. 
+Currently a work in progress. I'd like Skatter to be a plugin with tools to assist with creating randomised patterns out of pre-determined shapes.
+
+[![Install Skatter with Sketchpacks](http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png "Install Skatter with Sketchpacks")](https://sketchpacks.com/joshdjuric/Skatter/install)
+
 
 ## Arrange skatter
 Select the layers you'd like to Skatter and it will fill the artboard.
