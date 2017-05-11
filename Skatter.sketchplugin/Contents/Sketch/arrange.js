@@ -14,8 +14,9 @@ var _h = 640
 var maxDimension = 0
 
 //  Handles
-var entropy = 0
+var positionEntropy = 0
 var spaceScale = 1 // NEVER SET THIS TO ZERO todo: error handling
+var sizeEntropy = 0
 
 //  Layers and groups
 var selection = []
@@ -57,12 +58,21 @@ function onRun(context) {
   }
 
   //  Ask for entropy handle value
-  entropy = parseInt([doc askForUserInput:"Entropy % (the larger the number the more random the Skatter)" initialValue:"0"])
+  positionEntropy = parseInt([doc askForUserInput:"Entropy % (the larger the number the more random the Skatter)" initialValue:"0"])
 
   //  Make sure entropy is set correctly
-  if (isNaN(entropy)) {
+  if (isNaN(positionEntropy)) {
     doc.showMessage('Hey stoops! Entropy needs to be a number.')
-    entropy = 0;
+    positionEntropy = 0;
+  }
+
+  //  Ask for size entropy handle value
+  sizeEntropy = parseInt([doc askForUserInput:"Size entropy % (the larger the number the more random the sizes)" initialValue:"0"])
+
+  //  Make sure entropy is set correctly
+  if (isNaN(sizeEntropy)) {
+    doc.showMessage('Hey stoops! Size entropy needs to be a number.')
+    sizeEntropy = 0;
   }
 
   //  Determine maxDimension based on largest dimension of selected layers
@@ -132,9 +142,14 @@ function skatter() {
     //  Update name
     dupe.name = 'col: ' + colCount + ', row:' + rowCount
 
+    //  Apply size entropy
+    var scaleWithEntropy = getSizeEntropyScale()
+    dupe.frame().width = scaleWithEntropy * dupe.frame().width()
+    dupe.frame().height = scaleWithEntropy * dupe.frame().height()
+
     //  Determine position of new duplicate and apply any entropy
-    var posX = applyEntropy(colCount * unitX)
-    var posY = applyEntropy(rowCount * unitY)
+    var posX = applyPositionEntropy(colCount * unitX)
+    var posY = applyPositionEntropy(rowCount * unitY)
 
     //  Apply position
     dupe.frame().setX(posX - dupe.frame().width() / 2)
@@ -156,8 +171,13 @@ function skatter() {
 }
 
 //  Entropy algorithm
-function applyEntropy(value) {
-  return value + Math.floor(Math.random() * (Math.round(Math.random())?-entropy:entropy))
+function applyPositionEntropy(value) {
+  return value + Math.floor(Math.random() * (Math.round(Math.random())?-positionEntropy:positionEntropy))
+}
+
+function getSizeEntropyScale() {
+  var rand = (sizeEntropy / 100) * Math.random()
+  return (1 + (Math.round(Math.random())?-rand:rand))
 }
 
 //  Get next layer to duplicate
