@@ -12,10 +12,6 @@ Todo:
   
 Eventually, I'd like to implement some kind of dialog to adjust certain variables. Perhaps even extend the group class to allow adjusting handles after skattering. For the meantime; you can hack the plugin and edit the entropy and spaceScale variables for extra space and random positioning. 
 
-### Update
-
-I've created a branch which allows user input dialog for entropy and scale. It's early days but available in the [user-inputs branch](https://github.com/joshdjuric/Skatter/tree/user-inputs)
-
 ![PreviewArrange](https://raw.githubusercontent.com/joshdjuric/Skatter/master/docs/preview-arrange.gif "Preview arrange")
 
 ## Random rotate
