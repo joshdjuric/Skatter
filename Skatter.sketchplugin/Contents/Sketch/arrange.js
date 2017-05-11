@@ -20,16 +20,28 @@ var container = null
 function onRun(context) {
   var sketch = context.api()
   var doc = context.document
-  spaceScale = [doc askForUserInput:"Extra space scale %" initialValue:"0"]
-  spaceScale = 1 + spaceScale / 100
+  spaceScale = parseInt([doc askForUserInput:"Extra space scale %" initialValue:"0"])
 
-  entropy = [doc askForUserInput:"Entropy % (the larger the number the more random the Skatter)" initialValue:"0"]
+  if (isNaN(spaceScale)) {
+    doc.showMessage('Hey stoops! Space scale needs to be a number. Using 1 instead.')
+    spaceScale = 1
+  }
+  else {
+    spaceScale = 1 + spaceScale / 100
+  }
+
+  entropy = parseInt([doc askForUserInput:"Entropy % (the larger the number the more random the Skatter)" initialValue:"0"])
+
+  if (isNaN(entropy)) {
+    doc.showMessage('Hey stoops! Entropy needs to be a number.')
+    entropy = 0;
+  }
 
   selection = sketch.selectedDocument.selectedLayers
   layers = selection.nativeLayers
 
   if (layers.count() == 0) {
-    doc.showMessage('Hey stoops! You need to select some layers to arrange.')
+    doc.showMessage('Hey stoops! You need to select some layers to arrange. Using zero instead.')
     return;
   }
 
