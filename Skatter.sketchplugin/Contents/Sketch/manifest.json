@@ -5,7 +5,7 @@
     "description" : "Attempting to build a plugin with a set of commands to enable shape scattering. Currently just rootates randomly... shortcut key included :boom:",
     "authorEmail" : "joshdjuric@gmail.com",
     "author" : "Josh Djuric",
-    "appcast" : "https://raw.githubusercontent.com/joshdjuric/Skatter/master/skatter-appcast.xml"
+    "appcast" : "https://raw.githubusercontent.com/joshdjuric/Skatter/master/skatter-appcast.xml",
     "commands" : [
     {
       "script" : "random-rotate.js",
