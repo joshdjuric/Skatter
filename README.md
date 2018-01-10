@@ -1,9 +1,6 @@
 # Skatter
 Currently a work in progress. I'd like Skatter to be a plugin with tools to assist with creating randomised patterns out of pre-determined shapes.
 
-[![Install Skatter with Sketchpacks](http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png "Install Skatter with Sketchpacks")](https://sketchpacks.com/joshdjuric/Skatter/install)
-
-
 ## Arrange skatter
 Select the layers you'd like to Skatter and it will fill the artboard.
 
@@ -11,7 +8,8 @@ Shortcut key -> alt cmd A :tada:
 
 Todo:
   - Better artboard support
-  - Add UI to adjust entropy, spacing and rotation handles
+  - Add UI to adjust entropy, spacing, rotation and opacity handles
+  - What would be sweet is if there could be a Skatter object which retained the handle settings that you could tweak after the initial skatter; might need some smarts to help with that one.
   
 Eventually, I'd like to implement some kind of dialog to adjust certain variables. Perhaps even extend the group class to allow adjusting handles after skattering. For the meantime; you can hack the plugin and edit the entropy and spaceScale variables for extra space and random positioning. 
 
