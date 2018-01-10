@@ -2,7 +2,7 @@
     "name" : "Skatter",
     "identifier" : "com.sketchapp.Skatter",
     "version" : "1.0.4",
-    "description" : "Attempting to build a plugin with a set of commands to enable shape scattering. Currently just rootates randomly... shortcut key included :boom:",
+    "description" : "Attempting to build a plugin with a set of commands to enable shape scattering. Currently just rootates randomly... shortcut key included 💥",
     "authorEmail" : "joshdjuric@gmail.com",
     "author" : "Josh Djuric",
     "appcast" : "https://raw.githubusercontent.com/joshdjuric/Skatter/master/skatter-appcast.xml",
